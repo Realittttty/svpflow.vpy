@@ -21,13 +21,13 @@ clip = clip.resize.Point(format=vs.YUV420P8, dither_type="random", width=rewidth
 ##自适应倍帧###########################
 ##当abs为fasle时，目标帧数=num/den*源帧率（倍帧），能兼容帧数有变化的视频（虽然这种视频很少）
 ##当abs为true时，目标帧率=num/den（固定帧数），顺滑度可能不如倍帧？（瞎猜的，没有理论也没有实践）
-##源帧率超过第一个IF后面数字的的帧率就会禁用补帧，这个数字可以自己改，有高刷屏并且配置还行的话可以改到70以上
-if container_fps > 77 :
+##源帧率超过第一个IF后面数字的帧率就会禁用补帧，这个数字可以自己改，有高刷屏并且配置还行的话可以改到70以上
+if container_fps > 42 :
 	raise Warning("源帧率超过限制的范围，已临时禁用该脚本。")
-elif container_fps > 27 :
+elif container_fps > 22 :
 	smoothfps_params = "{rate:{num:2,den:1,abs:false},algo:13,gpuid:0,scene:{},mask:{area:75,cover:75}}"
-elif container_fps > 17 :
-	smoothfps_params = "{rate:{num:5,den:2,abs:false},algo:13,gpuid:0,scene:{},mask:{area:75,cover:75}}"
+elif container_fps > 12 :
+	smoothfps_params = "{rate:{num:3,den:1,abs:false},algo:13,gpuid:0,scene:{},mask:{area:75,cover:75}}"
 else :
 	smoothfps_params = "{rate:{num:4,den:1,abs:false},algo:13,gpuid:0,scene:{},mask:{area:75,cover:75}}"
 super_params="{pel:1,scale:{up:0,down:0},gpu:1,full:false,rc:true}"
